@@ -28,6 +28,7 @@ in
     home.stateVersion = "25.11";
 
     programs.fish.enable = true;
+    programs.starship.enable = true;
 
     home.shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#${config.base.homeConfig}";

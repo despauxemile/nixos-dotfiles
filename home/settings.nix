@@ -1,5 +1,5 @@
 # local private settings
 {
-  git.name = "";
-  git.email = "";
+  git.name = "Emile";
+  git.email = "despauxemile@gmail.com";
 }
