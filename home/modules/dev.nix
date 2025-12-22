@@ -21,6 +21,7 @@ in
     lazygit
     delta
     git
+    jq
   ];
 
   programs.git = {

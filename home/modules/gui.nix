@@ -17,6 +17,9 @@ in
     wl-clipboard
     waybar
     wofi
+    grim
+    slurp
+    hyprpicker
   ];
 
   programs.fish = {
