@@ -5,20 +5,64 @@
   ...
 }:
 
+let
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  configs = {
+    waybar = "waybar";
+  };
+in
 {
   home.packages = with pkgs; [
     wl-clipboard
+    waybar
     wofi
   ];
 
+  programs.fish = {
+    loginShellInit = ''
+      if test (tty) = /dev/tty1
+          exec hyprland
+      end
+    '';
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
     extraConfig = ''
       ${builtins.readFile ../../config/hypr/hyprland.conf}
     '';
   };
 
-  programs.kitty.enable = true;
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      ipc = true;
+      preload = [ "/home/milou/Pictures/wallpapers/XPS_Graphite.jpg" ];
+      wallpaper = [ ",/home/milou/Pictures/wallpapers/XPS_Graphite.jpg" ];
+    };
+  };
+
+  home.pointerCursor = {
+    hyprcursor.enable = true;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+  };
+
+  programs.kitty = {
+    enable = true;
+    font = {
+      name = "FiraCode Nerd Font";
+      size = 11;
+    };
+    themeFile = "tokyo_night_moon";
+    settings = {
+      background_opacity = 0.9;
+    };
+  };
 
   gtk = {
     enable = true;
@@ -67,5 +111,10 @@
       };
     };
   };
+
+  xdg.configFile = builtins.mapAttrs (name: subpath: {
+    source = create_symlink "${dotfiles}/${subpath}";
+    recursive = true;
+  }) configs;
 
 }

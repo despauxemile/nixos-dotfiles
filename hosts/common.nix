@@ -39,6 +39,8 @@
     enableSSHSupport = true;
   };
 
+  services.thermald.enable = true;
+
   # flakes
   nix.settings.experimental-features = [
     "nix-command"

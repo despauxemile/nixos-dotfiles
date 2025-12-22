@@ -1,0 +1,82 @@
+@define-color tn-moon-bg #222436;
+@define-color tn-moon-fg #c8d3f5;
+
+@define-color tn-moon-black #1b1d2b;
+@define-color tn-moon-red #ff757f;
+@define-color tn-moon-green #c3e88d;
+@define-color tn-moon-orange #ffc777;
+@define-color tn-moon-blue #82aaff;
+@define-color tn-moon-purple #c099ff;
+@define-color tn-moon-cyan #86e1fc;
+@define-color tn-moon-gray #828bb8;
+
+@define-color tn-moon-dark-gray #444a73;
+@define-color tn-moon-white #c8d3f5;
+
+* {
+	border: none;
+	border-radius: 0;
+	font-family: "FiraCode Nerd Font";
+	font-size: 14px;
+	min-height: 0;
+}
+
+window#waybar {
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+}
+
+.modules-left, .modules-center, .modules-right {
+	margin: 0 5px;
+}
+
+.modules-right * {
+	padding: 0 5px;
+	margin-left: 5px;
+}
+
+#workspaces button {
+	color: white;
+	padding: 0 6px;
+	margin: 0;
+	margin-left: 5px;
+	border-radius: 100%;
+}
+
+#workspaces button:first-child {
+	margin-left: 0px;
+}
+
+#workspaces button.empty {
+	color: gray;
+}
+
+#workspaces button.active {
+    color: cyan;
+	font-weight: bold;
+}
+
+#window {
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+#battery {
+    border-radius: 500px;
+}
+
+#battery.warning {
+	background-color: orange;
+}
+
+#battery.critical {
+	background-color: red;
+}
+
+#battery.charging {
+	background-color: green;
+}
+
+#clock {
+	font-weight: bold;
+}
