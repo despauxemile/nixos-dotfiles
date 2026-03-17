@@ -65,6 +65,7 @@ vim.lsp.enable({
     "cssls",
     "html",
     "pyright",
+    "jdtls",
 })
 -- for name, _ in pairs(vim.lsp.config._configs) do
 --     if name ~= "*" then

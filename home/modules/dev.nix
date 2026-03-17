@@ -11,7 +11,7 @@ in
 {
   home.packages = with pkgs; [
     # languages
-    rustup
+    # rustup -> per project?
     gcc
     zig
     python313Packages.python

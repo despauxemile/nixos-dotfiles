@@ -25,9 +25,29 @@
 
   services.getty.autologinUser = "milou";
 
+  services.fprintd.enable = true;
+
+  hardware.bluetooth.enable = true;
+  environment.systemPackages = with pkgs; [
+    bluetui
+  ];
+
+  virtualisation.libvirtd.enable = true;
+
   boot.blacklistedKernelModules = [ "uvcvideo" ];
 
-  services.fprintd.enable = true;
+  # cisco vpn
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openconnect ];
+
+  # probe rs udev rules
+  services.udev.packages = [
+    pkgs.openocd
+    (pkgs.writeTextFile {
+      name = "probers_udev";
+      text = builtins.readFile ../../config/69-probe-rs.rules;
+      destination = "/etc/udev/rules.d/69-probe-rs.rules";
+    })
+  ];
 
   # POWER
   powerManagement.powertop.enable = true;

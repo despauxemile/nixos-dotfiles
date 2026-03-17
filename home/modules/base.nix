@@ -30,6 +30,11 @@ in
     programs.fish.enable = true;
     programs.starship.enable = true;
 
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     home.shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#${config.base.homeConfig}";
     };
@@ -37,8 +42,12 @@ in
     home.packages = with pkgs; [
       bat
       tree
+      file
       htop
       fastfetch
+      typst
+      zip
+      unzip
       tmux
     ];
 

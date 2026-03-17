@@ -20,6 +20,8 @@ in
     grim
     slurp
     hyprpicker
+    nwg-displays
+    hyprlock
   ];
 
   programs.fish = {
@@ -32,7 +34,6 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
     extraConfig = ''
       ${builtins.readFile ../../config/hypr/hyprland.conf}
     '';
@@ -115,6 +116,17 @@ in
     };
   };
 
+  # xdg.mimeApps = {
+  #   enable = true;
+  #   defaultApplications = {
+  #     "text/html" = "firefox.desktop";
+  #     "x-scheme-handler/http" = "firefox.desktop";
+  #     "x-scheme-handler/https" = "firefox.desktop";
+  #     "x-scheme-handler/about" = "fiefox.desktop";
+  #     "x-scheme-handler/unknown" = "firefox.desktop";
+  #   };
+  # };
+  #
   xdg.configFile = builtins.mapAttrs (name: subpath: {
     source = create_symlink "${dotfiles}/${subpath}";
     recursive = true;
