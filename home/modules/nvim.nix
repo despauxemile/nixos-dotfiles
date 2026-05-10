@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-unstable,
   lib,
   ...
 }:
@@ -15,23 +16,26 @@ in
 {
   home.packages = with pkgs; [
     ripgrep
+    fd
     fzf
     nodejs
 
     # rust-analyzer
+    tree-sitter
     lua-language-server
     nil
     zls
     clang-tools
     vscode-langservers-extracted
     typescript-language-server
-    pyright
+    pkgs-unstable.ty
     tinymist
     # omnisharp-roslyn
   ];
 
   programs.neovim = {
     enable = true;
+    package = pkgs-unstable.neovim-unwrapped;
   };
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {

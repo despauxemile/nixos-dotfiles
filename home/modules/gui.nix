@@ -22,6 +22,7 @@ in
     hyprpicker
     nwg-displays
     hyprlock
+    pavucontrol
   ];
 
   programs.fish = {
@@ -44,8 +45,8 @@ in
     settings = {
       splash = false;
       ipc = true;
-      preload = [ "/home/milou/Pictures/wallpapers/XPS_Graphite.jpg" ];
-      wallpaper = [ ",/home/milou/Pictures/wallpapers/XPS_Graphite.jpg" ];
+      preload = lib.mkDefault [ ];
+      wallpaper = lib.mkDefault [ ];
     };
   };
 
@@ -60,7 +61,7 @@ in
     enable = true;
     font = {
       name = "FiraCode Nerd Font";
-      size = 11;
+      size = lib.mkDefault 11;
     };
     themeFile = "tokyo_night_moon";
     settings = {
@@ -116,17 +117,6 @@ in
     };
   };
 
-  # xdg.mimeApps = {
-  #   enable = true;
-  #   defaultApplications = {
-  #     "text/html" = "firefox.desktop";
-  #     "x-scheme-handler/http" = "firefox.desktop";
-  #     "x-scheme-handler/https" = "firefox.desktop";
-  #     "x-scheme-handler/about" = "fiefox.desktop";
-  #     "x-scheme-handler/unknown" = "firefox.desktop";
-  #   };
-  # };
-  #
   xdg.configFile = builtins.mapAttrs (name: subpath: {
     source = create_symlink "${dotfiles}/${subpath}";
     recursive = true;

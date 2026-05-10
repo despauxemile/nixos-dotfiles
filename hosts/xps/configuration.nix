@@ -30,6 +30,7 @@
   hardware.bluetooth.enable = true;
   environment.systemPackages = with pkgs; [
     bluetui
+    brightnessctl
   ];
 
   virtualisation.libvirtd.enable = true;
