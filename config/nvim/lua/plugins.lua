@@ -3,6 +3,7 @@ vim.pack.add({
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/nvim-treesitter/nvim-treesitter',
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') },
+    'https://github.com/rafamadriz/friendly-snippets',
     'https://github.com/saghen/blink.indent',
     'https://github.com/folke/tokyonight.nvim',
     'https://github.com/folke/todo-comments.nvim',
@@ -19,6 +20,7 @@ vim.cmd('colorscheme tokyonight-moon')
 -- FZF
 local fzf = require('fzf-lua')
 fzf.setup({
+    'fzf-native',
     winopts = {
         height = 0.85,
         width = 0.85,
@@ -36,6 +38,7 @@ vim.keymap.set('n', '<leader>gc', fzf.git_commits, { desc = "git commits" })
 vim.keymap.set('n', 'gd', fzf.lsp_definitions, { desc = "go to definition" })
 vim.keymap.set('n', 'gr', fzf.lsp_references, { desc = "references" })
 vim.keymap.set('n', '<leader>ca', fzf.lsp_code_actions, { desc = "code actions" })
+vim.keymap.set('n', '<leader>dd', fzf.diagnostics_workspace, { desc = "workspace diagnostics" })
 
 -- LSP
 vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float, { desc = "show diagnostics" })
@@ -56,6 +59,16 @@ vim.lsp.config['lua_ls'] = {
             hint = { enable = true, },
         },
     },
+}
+
+vim.lsp.config['rust_analyzer'] = {
+    settings = {
+        ['rust-analyzer'] = {
+            check = {
+                command = 'clippy'
+            }
+        },
+    }
 }
 
 vim.lsp.enable({
@@ -116,15 +129,9 @@ require('blink.cmp').setup({
 
 -- NVIM TREE
 require('nvim-tree').setup({
-    sort = {
-        sorter = "case_sensitive"
-    },
-    view = {
-        side = 'left',
-    },
-    renderer = {
-        group_empty = true,
-    }
+    sort = { sorter = "case_sensitive" },
+    view = { side = 'left', },
+    renderer = { group_empty = true, }
 })
 vim.keymap.set("n", "<leader>n", require('nvim-tree.api').tree.toggle, { desc = 'toggle sidebar' })
 

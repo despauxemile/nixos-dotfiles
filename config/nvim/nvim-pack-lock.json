@@ -9,6 +9,10 @@
       "rev": "15b3b25c2e76025733cc96df0144e9a9ef4d495c",
       "src": "https://github.com/saghen/blink.indent"
     },
+    "friendly-snippets": {
+      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
     "fzf-lua": {
       "rev": "44816af2465bb0a17ae0f1f2d8a4f9c3df524fcd",
       "src": "https://github.com/ibhagwan/fzf-lua"
