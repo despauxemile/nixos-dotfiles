@@ -32,6 +32,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit pkgs-unstable; };
               users.milou = import ./home/lab.nix;
               backupFileExtension = "backup";
             };
