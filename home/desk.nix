@@ -15,10 +15,10 @@
 
   base.homeConfig = "desk";
 
-  programs.kitty.font.size = 12;
+  programs.ghostty.settings.font-size = 12;
 
   home.packages = with pkgs; [
-    blender-hip
+    blender
     godot
     kicad-small
     gimp
@@ -26,6 +26,11 @@
 
   services.hyprpaper.settings = {
     preload = [ "/home/milou/Pictures/wallpapers/butwhy.png" ];
-    wallpaper = [ ",/home/milou/Pictures/wallpapers/butwhy.png" ];
+    wallpaper = [
+      {
+        monitor = "";
+        path = "/home/milou/Pictures/wallpapers/butwhy.png";
+      }
+    ];
   };
 }

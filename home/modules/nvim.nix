@@ -15,6 +15,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    neovim
     ripgrep
     fd
     fzf
@@ -28,14 +29,20 @@ in
     clang-tools
     vscode-langservers-extracted
     typescript-language-server
-    pkgs-unstable.ty
+    ty
     tinymist
     # omnisharp-roslyn
   ];
 
   programs.neovim = {
-    enable = true;
-    package = pkgs-unstable.neovim-unwrapped;
+    withRuby = false;
+    withPython3 = false;
+    # enable = true;
+    # package = pkgs-unstable.neovim-unwrapped;
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
   };
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {

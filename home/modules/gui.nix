@@ -9,7 +9,8 @@ let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
-    waybar = "waybar";
+    "waybar" = "waybar";
+    "hypr/hyprland.lua" = "hypr/hyprland.lua";
   };
 in
 {
@@ -23,22 +24,19 @@ in
     nwg-displays
     hyprlock
     pavucontrol
+    hyprpaper
   ];
 
   programs.fish = {
     loginShellInit = ''
       if test (tty) = /dev/tty1
-          exec hyprland
+          exec start-hyprland
       end
     '';
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = ''
-      ${builtins.readFile ../../config/hypr/hyprland.conf}
-    '';
-  };
+  # to remove automatic hyprland.conf
+  wayland.windowManager.hyprland.enable = false;
 
   services.hyprpaper = {
     enable = true;
@@ -57,15 +55,14 @@ in
     size = 24;
   };
 
-  programs.kitty = {
+  programs.ghostty = {
     enable = true;
-    font = {
-      name = "FiraCode Nerd Font";
-      size = lib.mkDefault 11;
-    };
-    themeFile = "tokyo_night_moon";
+    enableFishIntegration = true;
     settings = {
-      background_opacity = 0.9;
+      font-size = lib.mkDefault 11;
+      font-family = "FiraCode Nerd Font";
+      theme = "TokyoNight Moon";
+      background-opacity = 0.9;
     };
   };
 
@@ -75,24 +72,16 @@ in
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
     };
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-    cursorTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-    gtk3 = {
-      extraConfig.gtk-application-prefer-dark-theme = true;
-    };
+    colorScheme = "dark";
     gtk4 = {
-      extraConfig.gtk-application-prefer-dark-theme = true;
+      colorScheme = config.gtk.colorScheme;
+      theme = config.gtk.theme;
     };
   };
 
   programs.firefox = {
     enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     languagePacks = [ "en-US" ];
     policies = {
       DisableTelemetry = true;

@@ -38,6 +38,7 @@
   programs.gamemode.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
+  nixpkgs.config.rocmSupport = true;
 
   # virtualisation.libvirtd.enable = true;
 

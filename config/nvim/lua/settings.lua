@@ -19,11 +19,13 @@ opt.timeoutlen = 800
 opt.ttimeoutlen = 50
 opt.winborder = "rounded"
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.writebackup = false
+opt.autoread = true
+
+opt.swapfile = false
+opt.backup = false
+opt.writebackup = false
 opt.undofile = true
-vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
+opt.undodir = vim.fn.expand("~/.vim/undodir")
 
 -- keymap
 local k = vim.keymap
@@ -61,4 +63,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
     callback = function() vim.highlight.on_yank() end
+})
+
+-- reload on change
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = "*",
 })

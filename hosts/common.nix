@@ -54,7 +54,7 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = [
-    pkgs.xorg.libX11
+    pkgs.libX11
   ];
 
   services.thermald.enable = true;
